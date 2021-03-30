@@ -14,6 +14,10 @@ class PersonalDetails(models.Model):
     address = models.CharField(max_length=50, blank=False)
     about = models.TextField(max_length=2000, blank=False)
 
+    class Meta:
+        verbose_name = 'Profile'
+        verbose_name_plural = 'Profiles'
+
     def __str__(self):
         return f'{self.first_name.capitalize()} {self.last_name.capitalize()}'
 
