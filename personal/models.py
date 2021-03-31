@@ -66,8 +66,8 @@ class Education(models.Model):
     date_from = models.DateField(blank=False)
     date_to = models.DateField(blank=True, null=True)
     awarding_body = models.CharField(max_length=50, blank=False)
-    grade = models.CharField(max_length=20, blank=True)
-    details = models.TextField(max_length=2000, blank=True)
+    grade = models.CharField(max_length=20, blank=True, null=True)
+    details = models.TextField(max_length=2000, blank=True, null=True)
 
     # TODO - create property of formatted date
 
