@@ -63,7 +63,8 @@ class Education(models.Model):
     """
     title = models.CharField(max_length=500, blank=False)
     qualification_type = models.CharField(max_length=50, blank=False)
-    date = models.DateField(blank=False)
+    date_from = models.DateField(blank=False)
+    date_to = models.DateField(blank=True, null=True)
     awarding_body = models.CharField(max_length=50, blank=False)
     grade = models.CharField(max_length=20, blank=True)
     details = models.TextField(max_length=2000, blank=True)
