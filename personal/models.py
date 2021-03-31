@@ -76,4 +76,4 @@ class Education(models.Model):
         verbose_name_plural = 'Subjects'
 
     def __str__(self):
-        return self.title
+        return f'{self.title} - {self.qualification_type}'
