@@ -43,9 +43,9 @@ class WorkExperience(models.Model):
     """
     company = models.CharField(max_length=50, blank=False)
     date_from = models.DateField(blank=False)
-    date_to = models.DateField(blank=True)
+    date_to = models.DateField(blank=True, null=True)
     job_title = models.CharField(max_length=50, blank=False)
-    description = models.CharField(max_length=2000, blank=False)
+    description = models.TextField(max_length=2000, blank=False)
 
     # TODO - create property of formatted from and to date
 
