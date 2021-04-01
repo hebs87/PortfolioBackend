@@ -9,6 +9,7 @@ class Projects(models.Model):
     name = models.CharField(max_length=100, blank=False)
     description = models.TextField(max_length=500, blank=False)
     image = models.ImageField(upload_to='projects')
+    link = models.URLField(max_length=500, blank=False)
 
     class Meta:
         verbose_name = 'Project'
