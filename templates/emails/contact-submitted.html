@@ -1,0 +1,29 @@
+{% extends 'emails/base.html' %}
+
+{% block content %}
+
+  <p>
+    A new contact form message has been submitted by {{ email_info.name }}. Here are the details:
+  </p>
+  <p>
+    <strong>Name:</strong>
+    <br/>
+    {{ email_info.name }}
+  </p>
+  <p>
+    <strong>Subject:</strong>
+    <br/>
+    {{ email_info.subject }}
+  </p>
+  <p>
+    <strong>Email:</strong>
+    <br/>
+    {{ email_info.email }}
+  </p>
+  <p>
+    <strong>Message:</strong>
+    <br/>
+    {{ email_info.message }}
+  </p>
+
+{% endblock %}

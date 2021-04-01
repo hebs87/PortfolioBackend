@@ -1,0 +1,13 @@
+A new contact form message has been submitted by {{ email_info.name }}. Here are the details:
+
+<strong>Name:</strong>
+{{ email_info.name }}
+
+<strong>Subject:</strong>
+{{ email_info.subject }}
+
+<strong>Email:</strong>
+{{ email_info.email }}
+
+<strong>Message:</strong>
+{{ email_info.message }}
