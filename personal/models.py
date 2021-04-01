@@ -14,6 +14,8 @@ class PersonalDetails(models.Model):
     address = models.CharField(max_length=50, blank=False)
     about = models.TextField(max_length=2000, blank=False)
 
+    # TODO - create property of full name
+
     class Meta:
         verbose_name = 'Profile'
         verbose_name_plural = 'Profiles'
