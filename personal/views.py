@@ -10,9 +10,8 @@ from .serializers import (
 class PersonalDetailsViewSet(viewsets.ReadOnlyModelViewSet):
     """
     A read only viewset to return PersonalDetails model objects to the frontend
-    Only return the first record, as that is the only record to be rendered in the frontend
     """
-    queryset = PersonalDetails.objects.first()
+    queryset = PersonalDetails.objects.all()
     serializer_class = PersonalDetailsSerializer
 
 

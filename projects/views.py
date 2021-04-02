@@ -24,7 +24,7 @@ class MessagesViewSet(viewsets.ModelViewSet):
     queryset = Messages.objects.all()
     serializer_class = MessagesSerializer
 
-    @action(detail=True, methodss=['post'])
+    @action(detail=True, methods=['post'])
     def send_emails(self, request):
         """
         Send relevant emails on successful form submission
