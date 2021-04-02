@@ -14,8 +14,6 @@ class PersonalDetails(models.Model):
     address = models.CharField(max_length=50, blank=False)
     about = models.TextField(max_length=2000, blank=False)
 
-    # TODO - create property of full name
-
     class Meta:
         verbose_name = 'Profile'
         verbose_name_plural = 'Profiles'
@@ -49,8 +47,6 @@ class WorkExperience(models.Model):
     job_title = models.CharField(max_length=50, blank=False)
     description = models.TextField(max_length=2000, blank=False)
 
-    # TODO - create property of formatted from and to date
-
     class Meta:
         verbose_name = 'Job'
         verbose_name_plural = 'Jobs'
@@ -70,8 +66,6 @@ class Education(models.Model):
     awarding_body = models.CharField(max_length=50, blank=False)
     grade = models.CharField(max_length=20, blank=True, null=True)
     details = models.TextField(max_length=2000, blank=True, null=True)
-
-    # TODO - create property of formatted date
 
     class Meta:
         verbose_name = 'Subject'
