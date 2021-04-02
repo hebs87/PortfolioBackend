@@ -26,6 +26,7 @@ class Messages(models.Model):
     """
     Stores details of messages received from contact form
     """
+    created = models.DateTimeField(auto_now_add=True)
     name = models.CharField(max_length=100, blank=False)
     subject = models.CharField(max_length=200, blank=False)
     email = models.EmailField(blank=False)

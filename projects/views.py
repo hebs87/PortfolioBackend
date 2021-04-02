@@ -19,9 +19,7 @@ class MessagesViewSet(viewsets.ModelViewSet):
     A viewset to save the contact form data to the Messages model
     Once saved, an email is sent to me and the user
     """
-    # TODO: Overwrite list method to render Django template
-
-    queryset = Messages.objects.all()
+    queryset = Messages.objects.all().order_by('-created')
     serializer_class = MessagesSerializer
 
     @action(detail=True, methods=['post'])
