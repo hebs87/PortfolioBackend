@@ -1,4 +1,7 @@
+from django.conf import settings
 from django.db import models
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 
 
 # Create your models here.
@@ -30,3 +33,38 @@ class Messages(models.Model):
 
     def __str__(self):
         return f'{self.name} = {self.subject}'
+
+    def send_contact_submitted_email(self, email_info):
+        """
+        Send email to me  on successful contact form submission
+        """
+        try:
+            template_dict = {
+                'email_info': email_info
+            }
+            message = render_to_string('emails/contact-submitted.html', template_dict)
+            subject = "Portfolio Contact Form Submitted!"
+            to_email = [settings.FROM_EMAIL]
+            send_mail(subject, message, settings.FROM_EMAIL, to_email)
+        except:
+            return False
+
+        return True
+
+    def send_confirmation_email(self, email_info):
+        """
+        Send confirmation email to user on successful contact form submission
+        """
+        try:
+            template_dict = {
+                'email_info': email_info
+            }
+            message = render_to_string('emails/confirmation.html', template_dict)
+
+            subject = "Thanks for getting in touch!"
+            to_email = [email_info.email]
+            send_mail(subject, message, settings.FROM_EMAIL, to_email)
+        except:
+            return False
+
+        return True
