@@ -6,9 +6,9 @@ from .serializers import ProjectsSerializer, MessagesSerializer
 
 
 # Create your views here.
-class ProjectsViewSet(viewsets.ModelViewSet):
+class ProjectsViewSet(viewsets.ReadOnlyModelViewSet):
     """
-    A viewset to return Projects model objects to the frontend
+    A read only viewset to return Projects model objects to the frontend
     """
     queryset = Projects.objects.all()
     serializer_class = ProjectsSerializer
@@ -16,8 +16,8 @@ class ProjectsViewSet(viewsets.ModelViewSet):
 
 class MessagesViewSet(viewsets.ModelViewSet):
     """
-    A viewset to save the messages from the contact form to the Messages model
-    Once saved, an email is sent to me and also the user who completed the contact form
+    A viewset to save the contact form data to the Messages model
+    Once saved, an email is sent to me and the user
     """
     # TODO: Overwrite list method to render Django template
 
