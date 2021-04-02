@@ -13,6 +13,9 @@ class PersonalDetails(models.Model):
     phone = models.CharField(max_length=50, blank=False)
     address = models.CharField(max_length=50, blank=False)
     about = models.TextField(max_length=2000, blank=False)
+    github_url = models.URLField(blank=False)
+    facebook_url = models.URLField(blank=False)
+    instagram_url = models.URLField(blank=False)
 
     class Meta:
         verbose_name = 'Profile'
