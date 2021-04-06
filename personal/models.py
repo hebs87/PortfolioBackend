@@ -16,6 +16,7 @@ class PersonalDetails(models.Model):
     github_url = models.URLField(blank=False)
     facebook_url = models.URLField(blank=False)
     instagram_url = models.URLField(blank=False)
+    cv = models.FileField(blank=True, null=True, upload_to='files')
 
     class Meta:
         verbose_name = 'Profile'

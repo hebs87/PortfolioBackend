@@ -7,6 +7,7 @@ class PersonalDetailsSerializer(serializers.ModelSerializer):
     Serializes the PersonalDetails model and returns data as JSON
     """
     name = serializers.SerializerMethodField()
+    social_media_details = serializers.SerializerMethodField()
 
     def get_name(self, obj):
         """
@@ -14,9 +15,35 @@ class PersonalDetailsSerializer(serializers.ModelSerializer):
         """
         return f'{obj.first_name} {obj.last_name}'
 
+    def get_social_media_details(self, obj):
+        """
+        Return object of Github details
+        """
+        details = [
+            {
+                "name": "github",
+                "link": obj.github_url,
+                "title": "Follow me on GitHub",
+                "iconClass": "fa fa-github"
+            },
+            {
+                "name": "facebook",
+                "link": obj.facebook_url,
+                "title": "Follow me on Facebook",
+                "iconClass": "fa fa-facebook"
+            },
+            {
+                "name": "instagram",
+                "link": obj.instagram_url,
+                "title": "Follow me on Instagram",
+                "iconClass": "fa fa-instagram"
+            }
+        ]
+        return details
+
     class Meta:
         model = PersonalDetails
-        fields = ('id', 'name', 'job_title', 'email', 'phone', 'address', 'about')
+        fields = ('id', 'name', 'job_title', 'email', 'phone', 'address', 'about', 'social_media_details', 'cv')
 
 
 class ProfessionalSkillsSerializer(serializers.ModelSerializer):
