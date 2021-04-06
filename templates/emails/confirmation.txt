@@ -16,5 +16,8 @@ Here's a summary of the details you submitted:
 <strong>Message:</strong>
 {{ email_info.message }}
 
+If I haven't responded in 2 days, please email me on sunnyhebbar@hotmail.co.uk and let me know. I most likely won't have received your request.
+
+
 Thanks,
 Sunny

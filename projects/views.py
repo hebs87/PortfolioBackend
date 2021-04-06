@@ -1,5 +1,4 @@
 from rest_framework import status, viewsets
-from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import Projects, Messages
 from .serializers import ProjectsSerializer, MessagesSerializer
@@ -22,15 +21,15 @@ class MessagesViewSet(viewsets.ModelViewSet):
     queryset = Messages.objects.all().order_by('-created')
     serializer_class = MessagesSerializer
 
-    @action(detail=True, methods=['post'])
-    def send_emails(self, request):
-        """
-        Send relevant emails on successful form submission
-        """
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
         try:
             messages = Messages()
             messages.send_contact_submitted_email(request.data)
             messages.send_confirmation_email(request.data)
-            return Response({'message': 'emails sent'}, status=status.HTTP_200_OK)
         except:
             return Response({'message': 'failed to send emails'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)

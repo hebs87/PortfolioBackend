@@ -1,7 +1,8 @@
 from django.conf import settings
 from django.db import models
-from django.core.mail import send_mail
 from django.template.loader import render_to_string
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 
 
 # Create your models here.
@@ -33,39 +34,45 @@ class Messages(models.Model):
     message = models.TextField(max_length=2000, blank=False)
 
     def __str__(self):
-        return f'{self.name} = {self.subject}'
+        return f'{self.name}: {self.subject}'
+
+    def send_email(self, from_email, to_email, subject, html_content):
+        """
+        Initiate the SendGrid API Client and send the email
+        """
+        message = Mail(
+            from_email=from_email,
+            to_emails=to_email,
+            subject=subject,
+            html_content=html_content
+        )
+
+        try:
+            sg = SendGridAPIClient(settings.EMAIL_HOST_PASSWORD)
+            response = sg.send(message)
+        except Exception as e:
+            raise Exception
 
     def send_contact_submitted_email(self, email_info):
         """
         Send email to me  on successful contact form submission
         """
-        try:
-            template_dict = {
-                'email_info': email_info
-            }
-            message = render_to_string('emails/contact-submitted.html', template_dict)
-            subject = "Portfolio Contact Form Submitted!"
-            to_email = [settings.FROM_EMAIL]
-            send_mail(subject, message, settings.FROM_EMAIL, to_email)
-        except:
-            return False
-
-        return True
+        template_dict = {
+            'email_info': email_info
+        }
+        html_content = render_to_string('emails/contact-submitted.html', template_dict)
+        subject = "Portfolio Contact Form Submitted!"
+        self.send_email(settings.FROM_EMAIL, settings.FROM_EMAIL, subject, html_content)
 
     def send_confirmation_email(self, email_info):
         """
         Send confirmation email to user on successful contact form submission
         """
-        try:
-            template_dict = {
-                'email_info': email_info
-            }
-            message = render_to_string('emails/confirmation.html', template_dict)
+        template_dict = {
+            'email_info': email_info
+        }
+        html_content = render_to_string('emails/confirmation.html', template_dict)
 
-            subject = "Thanks for getting in touch!"
-            to_email = [email_info.email]
-            send_mail(subject, message, settings.FROM_EMAIL, to_email)
-        except:
-            return False
-
-        return True
+        subject = "Thanks for getting in touch!"
+        to_email = email_info['email']
+        self.send_email(settings.FROM_EMAIL, to_email, subject, html_content)
